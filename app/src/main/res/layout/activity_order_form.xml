@@ -29,6 +29,7 @@
                 android:id="@+id/spnr_pemesan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_weight="1" />
 
             <Button
@@ -42,7 +43,9 @@
         <EditText
             android:id="@+id/edtx_tglselesai"
             android:layout_width="match_parent"
+            android:hint="Tanggal Selesai"
             android:layout_height="wrap_content"
+
             android:ems="10"
             android:inputType="date" />
 
@@ -52,6 +55,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
+            android:hint="Cutting"
             android:text="Name" />
 
         <EditText
@@ -59,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Harga"
             android:inputType="number" />
 
         <LinearLayout
