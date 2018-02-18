@@ -22,14 +22,12 @@ public class CustomerFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_form);
         ButterKnife.bind(this);
-
     }
 
     @OnClick(R.id.btn_simpan) void onSubmit(){
         Customer customer = new Customer(edtx_nama.getText().toString(),edtx_alamat.getText().toString(),edtx_notelp.getText().toString());
         customer.save();
         setResult(RESULT_OK);
-
         finish();
     }
 

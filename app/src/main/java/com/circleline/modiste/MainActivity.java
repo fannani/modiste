@@ -13,14 +13,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import com.circleline.modiste.models.Customer;
+import com.circleline.modiste.models.OrderDB;
+import com.circleline.modiste.util.Constant;
+import com.orm.query.Select;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    @BindView(R.id.lsvw_order)
+    ListView lsvw_order;
+
+    private List<OrderDB> orderList;
+    private OrderAdapter orderAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -29,7 +49,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,OrderFormActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, Constant.CREATE_ORDER_REQUEST);
             }
         });
 
@@ -41,6 +61,17 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        orderList = Select.from(OrderDB.class).orderBy("status").list();
+        orderAdapter = new OrderAdapter(MainActivity.this,android.R.layout.simple_list_item_1,orderList);
+        lsvw_order.setAdapter(orderAdapter);
+        lsvw_order.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this,DetailOrderActivity.class);
+                intent.putExtra("orderID",orderAdapter.getItem(i).getId());
+                startActivityForResult(intent,Constant.DETAIL_ORDER_REQUEST);
+            }
+        });
     }
 
     @Override
@@ -98,5 +129,21 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constant.CREATE_ORDER_REQUEST ) {
+            if (resultCode == RESULT_OK) {
+                orderList =  Select.from(OrderDB.class).orderBy("status").list();
+                orderAdapter.setList(orderList);
+            }
+        } else if(requestCode == Constant.DETAIL_ORDER_REQUEST){
+            if(resultCode == RESULT_OK){
+                orderList =  Select.from(OrderDB.class).orderBy("status").list();
+                orderAdapter.setList(orderList);
+            }
+        }
+
     }
 }

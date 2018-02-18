@@ -5,5 +5,142 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.circleline.modiste.MeasurementFormActivity">
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
+        android:orientation="vertical"
+       >
+        <EditText
+            android:id="@+id/edtx_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Nama"
+             />
+
+        <EditText
+            android:id="@+id/edtx_lingkar_badan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Lingkar Badan"
+            android:inputType="number" />
+        <EditText
+            android:id="@+id/edtx_lingkar_pinggang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Lingkar Pinggang"
+            android:inputType="number" />
+        <EditText
+            android:id="@+id/edtx_lingkar_panggul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Lingkar Panggul"
+            android:inputType="number" />
+        <EditText
+            android:id="@+id/edtx_lebar_muka"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Lebar Muka"
+            android:inputType="number" />
+        <EditText
+            android:id="@+id/edtx_panjang_muka"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Panjang Muka"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/edtx_lebar_punggung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Lebar Punggung"
+            android:inputType="number" />
+        <EditText
+            android:id="@+id/edtx_panjang_punggung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Panjang Punggung"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/edtx_lebar_bahu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Lebar Bahu"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/edtx_panjang_sisi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Panjang Sisi"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/edtx_panjang_lengan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Panjang Lengan"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/edtx_lingkar_kerung_lengan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Lingkar Kerung Lengan"
+            android:inputType="number" />
+        <EditText
+            android:id="@+id/edtx_lingkar_pergelangan_lengan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Lingkar Pergelangan Lengan"
+            android:inputType="number" />
+        <EditText
+            android:id="@+id/edtx_panjang_baju"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Panjang Baju"
+            android:inputType="number" />
+        <EditText
+            android:id="@+id/edtx_lingkar_kerung_leher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Lingkar Kerung Leher"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btn_simpan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Simpan" />
+
+
+    </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
