@@ -1,10 +1,11 @@
-package com.circleline.modiste;
+package com.circleline.modiste.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.circleline.modiste.R;
 import com.circleline.modiste.models.Customer;
 
 import butterknife.BindView;

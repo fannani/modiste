@@ -24,7 +24,7 @@
             android:value="com.circleline.modiste" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -33,10 +33,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OrderFormActivity" />
-        <activity android:name=".CustomerFormActivity" />
-        <activity android:name=".MeasurementFormActivity" />
-        <activity android:name=".DetailOrderActivity"></activity>
+        <activity android:name=".activities.OrderFormActivity" />
+        <activity android:name=".activities.CustomerFormActivity" />
+        <activity android:name=".activities.MeasurementFormActivity" />
+        <activity android:name=".activities.DetailOrderActivity"></activity>
     </application>
 
 </manifest>

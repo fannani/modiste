@@ -1,22 +1,17 @@
-package com.circleline.modiste;
+package com.circleline.modiste.activities;
 
 import android.content.Intent;
-import android.icu.util.Measure;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.circleline.modiste.R;
 import com.circleline.modiste.models.Customer;
 import com.circleline.modiste.models.Measurement;
 import com.circleline.modiste.models.OrderDB;
 import com.circleline.modiste.util.Constant;
-
-import org.w3c.dom.Text;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

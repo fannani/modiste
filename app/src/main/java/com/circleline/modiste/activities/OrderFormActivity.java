@@ -1,15 +1,17 @@
-package com.circleline.modiste;
+package com.circleline.modiste.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.circleline.modiste.R;
+import com.circleline.modiste.adapters.CustomerSpinnerAdapter;
+import com.circleline.modiste.adapters.MeasurementSpinnerAdapter;
 import com.circleline.modiste.models.Customer;
 import com.circleline.modiste.models.Measurement;
 import com.circleline.modiste.models.OrderDB;

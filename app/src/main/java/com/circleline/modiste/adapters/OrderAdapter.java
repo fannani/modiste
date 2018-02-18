@@ -1,4 +1,4 @@
-package com.circleline.modiste;
+package com.circleline.modiste.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.circleline.modiste.R;
 import com.circleline.modiste.models.Customer;
 import com.circleline.modiste.models.Measurement;
 import com.circleline.modiste.models.OrderDB;
