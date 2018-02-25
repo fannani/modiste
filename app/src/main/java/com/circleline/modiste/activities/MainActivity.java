@@ -3,6 +3,8 @@ package com.circleline.modiste.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +19,8 @@ import android.widget.ListView;
 
 import com.circleline.modiste.R;
 import com.circleline.modiste.adapters.OrderAdapter;
+import com.circleline.modiste.fragments.CustomerListFragment;
+import com.circleline.modiste.fragments.OrderListFragment;
 import com.circleline.modiste.models.OrderDB;
 import com.circleline.modiste.util.Constant;
 import com.orm.query.Select;
@@ -29,11 +33,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    @BindView(R.id.lsvw_order)
-    ListView lsvw_order;
 
-    private List<OrderDB> orderList;
-    private OrderAdapter orderAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +43,20 @@ public class MainActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,OrderFormActivity.class);
-                startActivityForResult(intent, Constant.CREATE_ORDER_REQUEST);
+        if (savedInstanceState == null) {
+            Fragment fragment = null;
+            Class orderListFragment = OrderListFragment.class;
+            try {
+                fragment = (Fragment) orderListFragment.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        });
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -61,17 +66,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        orderList = Select.from(OrderDB.class).orderBy("status").list();
-        orderAdapter = new OrderAdapter(MainActivity.this,android.R.layout.simple_list_item_1,orderList);
-        lsvw_order.setAdapter(orderAdapter);
-        lsvw_order.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(MainActivity.this,DetailOrderActivity.class);
-                intent.putExtra("orderID",orderAdapter.getItem(i).getId());
-                startActivityForResult(intent,Constant.DETAIL_ORDER_REQUEST);
-            }
-        });
+
     }
 
     @Override
@@ -111,30 +106,26 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment fragment = null;
+        Class fragmentClass = null;
 
         if (id == R.id.nav_customer) {
-            // Handle the camera action
+            fragmentClass = CustomerListFragment.class;
         } else if(id == R.id.nav_home){
-
+            fragmentClass = OrderListFragment.class;
         }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Constant.CREATE_ORDER_REQUEST ) {
-            if (resultCode == RESULT_OK) {
-                orderList =  Select.from(OrderDB.class).orderBy("status").list();
-                orderAdapter.setList(orderList);
-            }
-        } else if(requestCode == Constant.DETAIL_ORDER_REQUEST){
-            if(resultCode == RESULT_OK){
-                orderList =  Select.from(OrderDB.class).orderBy("status").list();
-                orderAdapter.setList(orderList);
-            }
-        }
 
-    }
 }

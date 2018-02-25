@@ -36,7 +36,11 @@
         <activity android:name=".activities.OrderFormActivity" />
         <activity android:name=".activities.CustomerFormActivity" />
         <activity android:name=".activities.MeasurementFormActivity" />
-        <activity android:name=".activities.DetailOrderActivity"></activity>
+        <activity android:name=".activities.DetailOrderActivity" />
+        <activity android:name=".activities.DetailCustomerActivity" />
+        <activity android:name=".activities.EditCustomerActivity" />
+        <activity android:name=".activities.MeasurementListActivity" />
+        <activity android:name=".activities.DetailMeasurementActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lnly_order"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:orientation="horizontal"
+    >
+    <TextView
+        android:id="@+id/txvw_nama"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Nama"/>
+    <TextView
+        android:id="@+id/txvw_alamat"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Alamat"/>
+    <TextView
+        android:id="@+id/txvw_notelp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="No Telp"/>
+
+
+
+</LinearLayout>

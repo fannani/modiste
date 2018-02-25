@@ -10,4 +10,6 @@ public class Constant {
     public static final int CREATE_ORDER_REQUEST = 24;
     public static final int DETAIL_ORDER_REQUEST = 25;
     public static final int EDIT_ORDER_REQUEST = 26;
+    public static final int DETAIL_CUSTOMER_REQUEST = 27;
+    public static final int EDIT_CUSTOMER_REQUEST = 28;
 }
