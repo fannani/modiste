@@ -17,6 +17,9 @@ import butterknife.OnClick;
 public class DetailMeasurementActivity extends AppCompatActivity {
 
 
+    @BindView(R.id.txvw_nama)
+    TextView txvw_nama;
+
     @BindView(R.id.txvw_lingkar_badan)
     TextView txvw_lingkar_badan;
 
@@ -68,7 +71,14 @@ public class DetailMeasurementActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_measurement);
         ButterKnife.bind(this);
         measurementID = getIntent().getLongExtra("measurementID",-1);
+        setData();
+
+    }
+
+    void setData(){
+
         measurement = Measurement.find(Measurement.class,"id = ?",String.valueOf(measurementID)).get(0);
+        txvw_nama.setText(measurement.getNama());
         txvw_lingkar_badan.setText(measurement.getLingkarBadan());
         txvw_lingkar_pinggang.setText(measurement.getLingkarPinggang());
         txvw_lingkar_panggul.setText(measurement.getLingkarPanggul());
@@ -83,14 +93,13 @@ public class DetailMeasurementActivity extends AppCompatActivity {
         txvw_pergelangan_lengan.setText(measurement.getLingkarPergelanganLengan());
         txvw_panjang_baju.setText(measurement.getPanjangBaju());
         txvw_lingkar_kerung_leher.setText(measurement.getLingkarKerungLeher());
-
     }
 
     @OnClick(R.id.btn_edit)
     void onEdit(){
         Intent intent = new Intent(DetailMeasurementActivity.this,MeasurementFormActivity.class);
         intent.putExtra("measurementID",measurementID);
-        startActivityForResult(intent, Constant.EDIT_CUSTOMER_REQUEST);
+        startActivityForResult(intent, Constant.EDIT_MEASUREMENT_REQUEST);
     }
 
     @OnClick(R.id.btn_hapus)
@@ -98,5 +107,14 @@ public class DetailMeasurementActivity extends AppCompatActivity {
         measurement.delete();
         setResult(RESULT_OK,getIntent());
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constant.EDIT_MEASUREMENT_REQUEST ) {
+            if (resultCode == RESULT_OK) {
+                setData();
+            }
+        }
     }
 }

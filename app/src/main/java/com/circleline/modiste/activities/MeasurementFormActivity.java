@@ -69,6 +69,7 @@ public class MeasurementFormActivity extends AppCompatActivity {
         if(getIntent().hasExtra("measurementID")){
             idMeasurement = getIntent().getLongExtra("measurementID",-1);
             measurement = Measurement.find(Measurement.class,"id = ?",String.valueOf(idMeasurement)).get(0);
+            edtx_nama.setText(measurement.getNama());
             edtx_lingkar_badan.setText(measurement.getLingkarBadan());
             edtx_lingkar_pinggang.setText(measurement.getLingkarPinggang());
             edtx_lingkar_panggul.setText(measurement.getLingkarPanggul());
@@ -92,7 +93,6 @@ public class MeasurementFormActivity extends AppCompatActivity {
     void onSimpanMeasurement(){
         if(getIntent().hasExtra("measurementID")){
             measurement.setNama(edtx_nama.getText().toString());
-            measurement.setIdCustomer(idCustomer.toString());
             measurement.setLingkarBadan(edtx_lingkar_badan.getText().toString());
             measurement.setLingkarPinggang(edtx_lingkar_pinggang.getText().toString());
             measurement.setLingkarPanggul(edtx_lingkar_panggul.getText().toString());

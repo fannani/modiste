@@ -36,11 +36,15 @@ public class DetailCustomerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_customer);
         ButterKnife.bind(this);
         customerID = getIntent().getLongExtra("customerID",-1);
+        setData();
+
+    }
+
+    void setData(){
         customer = Customer.find(Customer.class,"id = ?",String.valueOf(customerID)).get(0);
         txvw_nama.setText(customer.getNama());
         txvw_alamat.setText(customer.getAlamat());
         txvw_notelp.setText(customer.getNoTelp());
-
     }
 
     @OnClick(R.id.btn_edit)
@@ -64,5 +68,13 @@ public class DetailCustomerActivity extends AppCompatActivity {
         Intent intent = new Intent(DetailCustomerActivity.this,MeasurementListActivity.class);
         intent.putExtra("customerID",customerID);
         startActivity(intent);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constant.EDIT_CUSTOMER_REQUEST ) {
+            if (resultCode == RESULT_OK) {
+                setData();
+            }
+        }
     }
 }

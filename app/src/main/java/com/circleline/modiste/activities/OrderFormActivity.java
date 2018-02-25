@@ -1,10 +1,12 @@
 package com.circleline.modiste.activities;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import com.circleline.modiste.R;
 import com.circleline.modiste.adapters.CustomerSpinnerAdapter;
 import com.circleline.modiste.adapters.MeasurementSpinnerAdapter;
+import com.circleline.modiste.fragments.DatePickerFragment;
 import com.circleline.modiste.models.Customer;
 import com.circleline.modiste.models.Measurement;
 import com.circleline.modiste.models.OrderDB;
@@ -70,7 +73,13 @@ public class OrderFormActivity extends AppCompatActivity {
         generateMeasurementList(tmpList);
 
 
-
+        edtx_tglselesai.setClickable(true);
+        edtx_tglselesai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePickerDialog();
+            }
+        });
         measurementAdapter = new MeasurementSpinnerAdapter(OrderFormActivity.this,android.R.layout.simple_spinner_item,measurementList);
         spnr_measurement.setAdapter(measurementAdapter);
         spnr_measurement.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -197,6 +206,19 @@ public class OrderFormActivity extends AppCompatActivity {
                 spnr_measurement.setSelection(measurements.size()+1);
             }
         }
+    }
+
+    public void showDatePickerDialog() {
+        DatePickerFragment newFragment = new DatePickerFragment();
+        newFragment.setOnDatePickerSet(new DatePickerFragment.DatePickerListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                edtx_tglselesai.setText(new StringBuilder().append(day).append("/")
+                        .append(month).append("/").append(year));
+            }
+        });
+        newFragment.show(getFragmentManager(),"datePicker");
+
     }
 
     private void generateCustomerList(List<Customer> list){
