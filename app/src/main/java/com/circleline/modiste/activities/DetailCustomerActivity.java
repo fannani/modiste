@@ -45,7 +45,7 @@ public class DetailCustomerActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_edit)
     void onEdit(){
-        Intent intent = new Intent(DetailCustomerActivity.this,EditCustomerActivity.class);
+        Intent intent = new Intent(DetailCustomerActivity.this,CustomerFormActivity.class);
         intent.putExtra("customerID",customerID);
         startActivityForResult(intent, Constant.EDIT_CUSTOMER_REQUEST);
     }
