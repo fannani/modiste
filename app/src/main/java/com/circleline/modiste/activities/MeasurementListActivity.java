@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.circleline.modiste.R;
 import com.circleline.modiste.adapters.CustomerAdapter;
 import com.circleline.modiste.adapters.MeasurementAdapter;
+import com.circleline.modiste.models.Customer;
 import com.circleline.modiste.models.Measurement;
 import com.circleline.modiste.util.Constant;
 
@@ -46,4 +47,14 @@ public class MeasurementListActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == Constant.DETAIL_MEASUREMENT_REQUEST){
+            if(resultCode == RESULT_OK){
+                measurementList =  Measurement.listAll(Measurement.class);
+                measurementAdapter.setList(measurementList);
+            }
+        }
+    }
 }
+
