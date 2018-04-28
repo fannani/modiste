@@ -91,6 +91,27 @@ public class DetailOrderActivity extends AppCompatActivity {
     @BindView(R.id.btn_selesai)
     Button btn_selesai;
 
+    @BindView(R.id.txvw_panjang_rok)
+    TextView txvw_panjang_rok;
+
+    @BindView(R.id.txvw_tinggi_panggul)
+    TextView txvw_tinggi_panggul;
+
+    @BindView(R.id.txvw_lingkar_pesak)
+    TextView txvw_lingkar_pesak;
+
+    @BindView(R.id.txvw_tinggi_duduk)
+    TextView txvw_tinggi_duduk;
+
+    @BindView(R.id.txvw_lingkar_paha)
+    TextView txvw_lingkar_paha;
+
+    @BindView(R.id.txvw_lingkar_lutut)
+    TextView txvw_lingkar_lutut;
+
+    @BindView(R.id.txvw_lingkar_kaki_celana)
+    TextView txvw_lingkar_kaki_celana;
+
     private OrderDB order;
     private Customer customer;
     private Measurement measurement;
@@ -165,6 +186,13 @@ public class DetailOrderActivity extends AppCompatActivity {
         txvw_pergelangan_lengan.setText("Pergelangan Lengan : "+measurement.getLingkarPergelanganLengan());
         txvw_panjang_baju.setText("Panjang Baju : "+measurement.getPanjangBaju());
         txvw_lingkar_kerung_leher.setText("Lingkar Kerung Leher : "+measurement.getLingkarKerungLeher());
+        txvw_panjang_rok.setText("Panjang Rok : "+measurement.getPanjangRok());
+        txvw_tinggi_panggul.setText("Tinggi Panggul : "+measurement.getTinggiPanggul());
+        txvw_lingkar_pesak.setText("Lingkar Pesak : "+measurement.getLingkarPesak());
+        txvw_tinggi_duduk.setText("Tinggi Duduk : "+measurement.getTinggiDuduk());
+        txvw_lingkar_paha.setText("Lingkar Paha : "+measurement.getLingkarPaha());
+        txvw_lingkar_lutut.setText("Lingkar Lutut : "+measurement.getLingkarLutut());
+        txvw_lingkar_kaki_celana.setText("Lingkar Kaki Celana : "+measurement.getLingkarKakiCelana());
 
         if(order.getStatus().equals("1")){
             btn_selesai.setVisibility(View.GONE);
