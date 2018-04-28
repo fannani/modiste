@@ -42,9 +42,9 @@ public class DetailCustomerActivity extends AppCompatActivity {
 
     void setData(){
         customer = Customer.find(Customer.class,"id = ?",String.valueOf(customerID)).get(0);
-        txvw_nama.setText(customer.getNama());
-        txvw_alamat.setText(customer.getAlamat());
-        txvw_notelp.setText(customer.getNoTelp());
+        txvw_nama.setText("Nama : "+customer.getNama());
+        txvw_alamat.setText("Alamat : "+customer.getAlamat());
+        txvw_notelp.setText("No Telp : "+customer.getNoTelp());
     }
 
     @OnClick(R.id.btn_edit)

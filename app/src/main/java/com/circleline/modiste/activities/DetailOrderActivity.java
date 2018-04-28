@@ -1,10 +1,18 @@
 package com.circleline.modiste.activities;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.circleline.modiste.R;
@@ -12,6 +20,10 @@ import com.circleline.modiste.models.Customer;
 import com.circleline.modiste.models.Measurement;
 import com.circleline.modiste.models.OrderDB;
 import com.circleline.modiste.util.Constant;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -92,6 +104,41 @@ public class DetailOrderActivity extends AppCompatActivity {
 
         orderID = getIntent().getLongExtra("orderID",-1);
         updateView(orderID);
+        loadImageFromStorage(String.valueOf(orderID));
+    }
+
+    private void loadImageFromStorage(String filename)
+    {
+
+        try {
+            ContextWrapper cw = new ContextWrapper(getApplicationContext());
+            // path to /data/data/yourapp/app_data/imageDir
+            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+            // Create imageDir
+            File mypath=new File(directory,filename);
+            final Bitmap b = BitmapFactory.decodeStream(new FileInputStream(mypath));
+            ImageView img=(ImageView)findViewById(R.id.imvw_foto);
+            img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DetailOrderActivity.this);
+                    LayoutInflater inflater = DetailOrderActivity.this.getLayoutInflater();
+                    View dialogView = inflater.inflate(R.layout.dialog_image_order,null);
+                    ImageView imvw_foto = dialogView.findViewById(R.id.imvw_foto);
+                    imvw_foto.setImageBitmap(b);
+                    builder.setView(dialogView);
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            });
+            img.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     void updateView(long id){
@@ -99,25 +146,25 @@ public class DetailOrderActivity extends AppCompatActivity {
         customer = Customer.find(Customer.class,"id = ?",String.valueOf(order.getIdCustomer())).get(0);
         measurement = Measurement.find(Measurement.class,"id = ?",String.valueOf(order.getIdMeasurement())).get(0);
 
-        txvw_customer.setText(customer.getNama());
-        txvw_tanggal_masuk.setText(order.getTglMasuk());
-        txvw_tanggal_selesai.setText(order.getTglSelesai());
-        txvw_cutting.setText(order.getCutting());
-        txvw_harga.setText(order.getHarga());
-        txvw_lingkar_badan.setText(measurement.getLingkarBadan());
-        txvw_lingkar_pinggang.setText(measurement.getLingkarPinggang());
-        txvw_lingkar_panggul.setText(measurement.getLingkarPanggul());
-        txvw_lebar_muka.setText(measurement.getLebarMuka());
-        txvw_panjang_muka.setText(measurement.getPanjangMuka());
-        txvw_lebar_punggung.setText(measurement.getLebarPunggung());
-        txvw_panjang_punggung.setText(measurement.getPanjangPunggung());
-        txvw_lebar_bahu.setText(measurement.getLebarBahu());
-        txvw_panjang_sisi.setText(measurement.getPanjangSisi());
-        txvw_panjang_lengan.setText(measurement.getPanjangLengan());
-        txvw_lingkar_kerung_lengan.setText(measurement.getLingkarKerungLeher());
-        txvw_pergelangan_lengan.setText(measurement.getLingkarPergelanganLengan());
-        txvw_panjang_baju.setText(measurement.getPanjangBaju());
-        txvw_lingkar_kerung_leher.setText(measurement.getLingkarKerungLeher());
+        txvw_customer.setText("Nama : "+customer.getNama());
+        txvw_tanggal_masuk.setText("Tanggal Masuk : "+order.getTglMasuk());
+        txvw_tanggal_selesai.setText("Tanggal Selesai : "+order.getTglSelesai());
+        txvw_cutting.setText("Tanggal Cutting : "+order.getCutting());
+        txvw_harga.setText("Harga : "+order.getHarga());
+        txvw_lingkar_badan.setText("Lingkar Badan : "+measurement.getLingkarBadan());
+        txvw_lingkar_pinggang.setText("Lingkar Pinggang : "+measurement.getLingkarPinggang());
+        txvw_lingkar_panggul.setText("Lingkar Pinggul : "+measurement.getLingkarPanggul());
+        txvw_lebar_muka.setText("Lebar Muka : "+measurement.getLebarMuka());
+        txvw_panjang_muka.setText("Panjang Muka : "+measurement.getPanjangMuka());
+        txvw_lebar_punggung.setText("Lebar Punggung : "+measurement.getLebarPunggung());
+        txvw_panjang_punggung.setText("Panjang Punggung : "+measurement.getPanjangPunggung());
+        txvw_lebar_bahu.setText("Lebar Bahu : "+measurement.getLebarBahu());
+        txvw_panjang_sisi.setText("Panjang Sisi : "+measurement.getPanjangSisi());
+        txvw_panjang_lengan.setText("Panjang Lengan : "+measurement.getPanjangLengan());
+        txvw_lingkar_kerung_lengan.setText("Lingkar Kerung Lengan : "+measurement.getLingkarKerungLeher());
+        txvw_pergelangan_lengan.setText("Pergelangan Lengan : "+measurement.getLingkarPergelanganLengan());
+        txvw_panjang_baju.setText("Panjang Baju : "+measurement.getPanjangBaju());
+        txvw_lingkar_kerung_leher.setText("Lingkar Kerung Leher : "+measurement.getLingkarKerungLeher());
 
         if(order.getStatus().equals("1")){
             btn_selesai.setVisibility(View.GONE);
@@ -131,6 +178,7 @@ public class DetailOrderActivity extends AppCompatActivity {
         setResult(RESULT_OK,getIntent());
         finish();
     }
+
 
     @OnClick(R.id.btn_batalkan)
     void onBatalkan(){

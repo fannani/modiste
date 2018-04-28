@@ -62,6 +62,29 @@ public class DetailMeasurementActivity extends AppCompatActivity {
     @BindView(R.id.txvw_lingkar_kerung_leher)
     TextView txvw_lingkar_kerung_leher;
 
+    @BindView(R.id.txvw_panjang_rok)
+    TextView txvw_panjang_rok;
+
+    @BindView(R.id.txvw_tinggi_panggul)
+    TextView txvw_tinggi_panggul;
+
+    @BindView(R.id.txvw_lingkar_pesak)
+    TextView txvw_lingkar_pesak;
+
+    @BindView(R.id.txvw_tinggi_duduk)
+    TextView txvw_tinggi_duduk;
+
+    @BindView(R.id.txvw_lingkar_paha)
+    TextView txvw_lingkar_paha;
+
+    @BindView(R.id.txvw_lingkar_lutut)
+    TextView txvw_lingkar_lutut;
+
+    @BindView(R.id.txvw_lingkar_kaki_celana)
+    TextView txvw_lingkar_kaki_celana;
+
+
+
     private Measurement measurement;
     private long measurementID;
 
@@ -93,6 +116,13 @@ public class DetailMeasurementActivity extends AppCompatActivity {
         txvw_pergelangan_lengan.setText(measurement.getLingkarPergelanganLengan());
         txvw_panjang_baju.setText(measurement.getPanjangBaju());
         txvw_lingkar_kerung_leher.setText(measurement.getLingkarKerungLeher());
+        txvw_panjang_rok.setText(measurement.getPanjangRok());
+        txvw_tinggi_panggul.setText(measurement.getTinggiPanggul());
+        txvw_lingkar_pesak.setText(measurement.getLingkarPesak());
+        txvw_tinggi_duduk.setText(measurement.getTinggiDuduk());
+        txvw_lingkar_paha.setText(measurement.getLingkarPaha());
+        txvw_lingkar_lutut.setText(measurement.getLingkarLutut());
+        txvw_lingkar_kaki_celana.setText(measurement.getLingkarKakiCelana());
     }
 
     @OnClick(R.id.btn_edit)

@@ -37,26 +37,54 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="tambah" />
+                android:drawableLeft="@drawable/ic_add_black" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lnly_tanggal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/edtx_tglselesai"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:hint="Tanggal Selesai"
+                android:layout_height="wrap_content"
+
+                android:ems="10"
+                android:inputType="date" />
+            <Button
+                android:id="@+id/btn_datepicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_date_range_black_24dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lnly_cutting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtx_cutting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:hint="Tanggal Cutting"
+                />
+            <Button
+                android:id="@+id/btn_datepicker_cutting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_date_range_black_24dp" />
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/edtx_tglselesai"
-            android:layout_width="match_parent"
-            android:hint="Tanggal Selesai"
-            android:layout_height="wrap_content"
-
-            android:ems="10"
-            android:inputType="date" />
-
-        <EditText
-            android:id="@+id/edtx_cutting"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Cutting"
-             />
 
         <EditText
             android:id="@+id/edtx_harga"
@@ -83,11 +111,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Tambah" />
+                android:drawableLeft="@drawable/ic_add_black" />
         </LinearLayout>
+        <ImageView
+            android:id="@+id/imvw_foto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop" />
+
+        <Button
+            android:id="@+id/btn_upload"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Pilih Foto" />
 
         <Button
             android:id="@+id/btn_simpan"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Simpan" />

@@ -51,11 +51,33 @@ public class MeasurementFormActivity extends AppCompatActivity {
 
     @BindView(R.id.edtx_lingkar_pergelangan_lengan)
     EditText edtx_lingkar_pergelangan_lengan;
+
     @BindView(R.id.edtx_panjang_baju)
     EditText edtx_panjang_baju;
 
     @BindView(R.id.edtx_lingkar_kerung_leher)
     EditText edtx_lingkar_kerung_leher;
+
+    @BindView(R.id.edtx_panjang_rok)
+    EditText edtx_panjang_rok;
+
+    @BindView(R.id.edtx_tinggi_panggul)
+    EditText edtx_tinggi_panggul;
+
+    @BindView(R.id.edtx_lingkar_pesak)
+    EditText edtx_lingkar_pesak;
+
+    @BindView(R.id.edtx_tinggi_duduk)
+    EditText edtx_tinggi_duduk;
+
+    @BindView(R.id.edtx_lingkar_paha)
+    EditText edtx_lingkar_paha;
+
+    @BindView(R.id.edtx_lingkar_lutut)
+    EditText edtx_lingkar_lutut;
+
+    @BindView(R.id.edtx_lingkar_kaki_celana)
+    EditText edtx_lingkar_kaki_celana;
 
     private Long idCustomer;
     private Long idMeasurement;
@@ -84,6 +106,13 @@ public class MeasurementFormActivity extends AppCompatActivity {
             edtx_lingkar_pergelangan_lengan.setText(measurement.getLingkarPergelanganLengan());
             edtx_panjang_baju.setText(measurement.getPanjangBaju());
             edtx_lingkar_kerung_leher.setText(measurement.getLingkarKerungLeher());
+            edtx_panjang_rok.setText(measurement.getPanjangRok());
+            edtx_tinggi_panggul.setText(measurement.getTinggiPanggul());
+            edtx_lingkar_pesak.setText(measurement.getLingkarPesak());
+            edtx_tinggi_duduk.setText(measurement.getTinggiDuduk());
+            edtx_lingkar_paha.setText(measurement.getLingkarPaha());
+            edtx_lingkar_lutut.setText(measurement.getLingkarLutut());
+            edtx_lingkar_kaki_celana.setText(measurement.getLingkarKakiCelana());
         } else {
             idCustomer = getIntent().getLongExtra("idCustomer",-1);
         }
@@ -107,6 +136,13 @@ public class MeasurementFormActivity extends AppCompatActivity {
             measurement.setLingkarPergelanganLengan(edtx_lingkar_pergelangan_lengan.getText().toString());
             measurement.setPanjangBaju(edtx_panjang_baju.getText().toString());
             measurement.setLingkarKerungLeher(edtx_lingkar_kerung_leher.getText().toString());
+            measurement.setPanjangRok(edtx_panjang_rok.getText().toString());
+            measurement.setTinggiPanggul(edtx_tinggi_panggul.getText().toString());
+            measurement.setLingkarPesak(edtx_lingkar_pesak.getText().toString());
+            measurement.setTinggiDuduk(edtx_tinggi_duduk.getText().toString());
+            measurement.setLingkarPaha(edtx_lingkar_paha.getText().toString());
+            measurement.setLingkarLutut(edtx_lingkar_lutut.getText().toString());
+            measurement.setLingkarKakiCelana(edtx_lingkar_kaki_celana.getText().toString());
             measurement.save();
         } else {
             Measurement data = new Measurement();
@@ -126,6 +162,13 @@ public class MeasurementFormActivity extends AppCompatActivity {
             data.setLingkarPergelanganLengan(edtx_lingkar_pergelangan_lengan.getText().toString());
             data.setPanjangBaju(edtx_panjang_baju.getText().toString());
             data.setLingkarKerungLeher(edtx_lingkar_kerung_leher.getText().toString());
+            data.setPanjangRok(edtx_panjang_rok.getText().toString());
+            data.setTinggiPanggul(edtx_tinggi_panggul.getText().toString());
+            data.setLingkarPesak(edtx_lingkar_pesak.getText().toString());
+            data.setTinggiDuduk(edtx_tinggi_duduk.getText().toString());
+            data.setLingkarPaha(edtx_lingkar_paha.getText().toString());
+            data.setLingkarLutut(edtx_lingkar_lutut.getText().toString());
+            data.setLingkarKakiCelana(edtx_lingkar_kaki_celana.getText().toString());
             data.save();
         }
         setResult(RESULT_OK);

@@ -1,13 +1,31 @@
 package com.circleline.modiste.activities;
 
-import android.app.DialogFragment;
+import android.annotation.TargetApi;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.os.Parcelable;
+import android.provider.MediaStore;
+import android.support.media.ExifInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,15 +39,25 @@ import com.circleline.modiste.models.OrderDB;
 import com.circleline.modiste.util.Constant;
 import com.circleline.modiste.util.DateUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.Manifest.permission.CAMERA;
+
 public class OrderFormActivity extends AppCompatActivity {
 
+    private static final String TAG = "OrderFormActivity";
     @BindView(R.id.spnr_pemesan)
     Spinner spnr_pemesan;
 
@@ -46,8 +74,12 @@ public class OrderFormActivity extends AppCompatActivity {
     @BindView(R.id.edtx_harga)
     EditText edtx_harga;
 
+    @BindView(R.id.imvw_foto)
+    ImageView imvw_foto;
 
 
+
+    private final static int ALL_PERMISSIONS_RESULT = 107;
 
     List<Customer> customerList = new ArrayList<Customer>();
     private CustomerSpinnerAdapter customerAdapter;
@@ -59,6 +91,13 @@ public class OrderFormActivity extends AppCompatActivity {
     private Measurement selectedMeasurement;
     private long orderID = -1;
     private OrderDB order;
+
+    Bitmap myBitmap;
+    Uri picUri;
+
+    private ArrayList<String> permissionsToRequest;
+    private ArrayList<String> permissionsRejected = new ArrayList();
+    private ArrayList permissions = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +113,7 @@ public class OrderFormActivity extends AppCompatActivity {
 
 
         edtx_tglselesai.setClickable(true);
-        edtx_tglselesai.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDatePickerDialog();
-            }
-        });
+
         measurementAdapter = new MeasurementSpinnerAdapter(OrderFormActivity.this,android.R.layout.simple_spinner_item,measurementList);
         spnr_measurement.setAdapter(measurementAdapter);
         spnr_measurement.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -121,6 +155,8 @@ public class OrderFormActivity extends AppCompatActivity {
             edtx_tglselesai.setText(order.getTglSelesai());
             edtx_cutting.setText(order.getCutting());
             edtx_harga.setText(order.getHarga());
+            loadImageFromStorage(String.valueOf(orderID));
+
             selectedCustomer = Customer.find(Customer.class,"id = ?",String.valueOf(order.getIdCustomer())).get(0);
             int size = customerList.size();
             int pemesan = -1;
@@ -149,6 +185,37 @@ public class OrderFormActivity extends AppCompatActivity {
 
             spnr_measurement.setSelection(measurement);
         }
+
+        permissions.add(CAMERA);
+        permissionsToRequest = findUnAskedPermissions(permissions);
+        //get the permissions we have asked for before but are not granted..
+        //we will store this in a global list to access later.
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (permissionsToRequest.size() > 0)
+                requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
+        }
+
+    }
+
+    @OnClick(R.id.btn_upload)
+    void onUploadFoto(){
+        startActivityForResult(getPickImageChooserIntent(), Constant.UPLOAD_FOTO_REQUEST);
+    }
+
+    @OnClick(R.id.edtx_tglselesai)
+    void onTglSelesaiClick(){
+        showDatePickerDialog();
+    }
+
+    @OnClick(R.id.btn_datepicker)
+    void onDatepicker(){
+        showDatePickerDialog();
+    }
+    @OnClick(R.id.btn_datepicker_cutting)
+    void onCutting(){
+        showDatePickerDialogCutting();
     }
 
     @OnClick(R.id.btn_tambahpemesan)
@@ -184,6 +251,11 @@ public class OrderFormActivity extends AppCompatActivity {
                     ,edtx_harga.getText().toString()
             );
             neworder.save();
+            if(myBitmap != null){
+                String id = String.valueOf(neworder.getId());
+                saveToInternalStorage(myBitmap,id);
+            }
+
         }
         setResult(RESULT_OK);
         finish();
@@ -205,8 +277,118 @@ public class OrderFormActivity extends AppCompatActivity {
                 measurementAdapter.notifyDataSetChanged();
                 spnr_measurement.setSelection(measurements.size()+1);
             }
+        } else if(requestCode == Constant.UPLOAD_FOTO_REQUEST){
+            if(resultCode == RESULT_OK){
+                if (getPickImageResultUri(data) != null) {
+                    picUri = getPickImageResultUri(data);
+
+                    try {
+                        myBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), picUri);
+                        myBitmap = getResizedBitmap(myBitmap, 500);
+
+                        imvw_foto.setImageBitmap(myBitmap);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                    myBitmap = bitmap;
+                    imvw_foto.setImageBitmap(myBitmap);
+
+                }
+            }
         }
     }
+
+    /** Create a File for saving an image or video */
+    private  File getOutputMediaFile(){
+        // To be safe, you should check that the SDCard is mounted
+        // using Environment.getExternalStorageState() before doing this.
+        File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
+                + "/Android/data/"
+                + getApplicationContext().getPackageName()
+                + "/Files");
+
+        // This location works best if you want the created images to be shared
+        // between applications and persist after your app has been uninstalled.
+
+        // Create the storage directory if it does not exist
+        if (! mediaStorageDir.exists()){
+            if (! mediaStorageDir.mkdirs()){
+                return null;
+            }
+        }
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
+        File mediaFile;
+        String mImageName="MI_"+ timeStamp +".jpg";
+        mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
+        return mediaFile;
+    }
+
+    private void loadImageFromStorage(String filename)
+    {
+
+        try {
+            ContextWrapper cw = new ContextWrapper(getApplicationContext());
+            // path to /data/data/yourapp/app_data/imageDir
+            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+            // Create imageDir
+            File mypath=new File(directory,filename);
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(mypath));
+            ImageView img=(ImageView)findViewById(R.id.imvw_foto);
+            img.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+    private void storeImage(Bitmap image) {
+        File pictureFile = getOutputMediaFile();
+        if (pictureFile == null) {
+            Log.d(TAG,
+                    "Error creating media file, check storage permissions: ");// e.getMessage());
+            return;
+        }
+        try {
+            FileOutputStream fos = new FileOutputStream(pictureFile);
+            image.compress(Bitmap.CompressFormat.PNG, 90, fos);
+            fos.close();
+        } catch (FileNotFoundException e) {
+            Log.d(TAG, "File not found: " + e.getMessage());
+        } catch (IOException e) {
+            Log.d(TAG, "Error accessing file: " + e.getMessage());
+        }
+    }
+
+    private String saveToInternalStorage(Bitmap bitmapImage,String filename){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,filename);
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+    }
+
+
 
     public void showDatePickerDialog() {
         DatePickerFragment newFragment = new DatePickerFragment();
@@ -214,6 +396,18 @@ public class OrderFormActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 edtx_tglselesai.setText(new StringBuilder().append(day).append("/")
+                        .append(month).append("/").append(year));
+            }
+        });
+        newFragment.show(getFragmentManager(),"datePicker");
+
+    }
+    public void showDatePickerDialogCutting() {
+        DatePickerFragment newFragment = new DatePickerFragment();
+        newFragment.setOnDatePickerSet(new DatePickerFragment.DatePickerListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                edtx_cutting.setText(new StringBuilder().append(day).append("/")
                         .append(month).append("/").append(year));
             }
         });
@@ -234,4 +428,218 @@ public class OrderFormActivity extends AppCompatActivity {
         measurementList.add(hint);
         measurementList.addAll(list);
     }
+
+    public Intent getPickImageChooserIntent() {
+
+        // Determine Uri of camera image to save.
+        Uri outputFileUri = getCaptureImageOutputUri();
+
+        List<Intent> allIntents = new ArrayList();
+        PackageManager packageManager = getPackageManager();
+
+        // collect all camera intents
+        Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
+        for (ResolveInfo res : listCam) {
+            Intent intent = new Intent(captureIntent);
+            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+            intent.setPackage(res.activityInfo.packageName);
+            if (outputFileUri != null) {
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+            }
+            allIntents.add(intent);
+        }
+
+        // collect all gallery intents
+        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        List<ResolveInfo> listGallery = packageManager.queryIntentActivities(galleryIntent, 0);
+        for (ResolveInfo res : listGallery) {
+            Intent intent = new Intent(galleryIntent);
+            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+            intent.setPackage(res.activityInfo.packageName);
+            allIntents.add(intent);
+        }
+
+        // the main intent is the last in the list (fucking android) so pickup the useless one
+        Intent mainIntent = allIntents.get(allIntents.size() - 1);
+        for (Intent intent : allIntents) {
+            if (intent.getComponent().getClassName().equals("com.android.documentsui.DocumentsActivity")) {
+                mainIntent = intent;
+                break;
+            }
+        }
+        allIntents.remove(mainIntent);
+
+        // Create a chooser from the main intent
+        Intent chooserIntent = Intent.createChooser(mainIntent, "Select source");
+
+        // Add all other intents
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, allIntents.toArray(new Parcelable[allIntents.size()]));
+
+        return chooserIntent;
+    }
+
+    /**
+     * Get URI to image received from capture by camera.
+     */
+    private Uri getCaptureImageOutputUri() {
+        Uri outputFileUri = null;
+        File getImage = getExternalCacheDir();
+        if (getImage != null) {
+            outputFileUri = Uri.fromFile(new File(getImage.getPath(), "profile.png"));
+        }
+        return outputFileUri;
+    }
+
+    private ArrayList findUnAskedPermissions(ArrayList<String> wanted) {
+        ArrayList result = new ArrayList();
+
+        for (String perm : wanted) {
+            if (!hasPermission(perm)) {
+                result.add(perm);
+            }
+        }
+
+        return result;
+    }
+    private boolean hasPermission(String permission) {
+        if (canMakeSmores()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+            }
+        }
+        return true;
+    }
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+    private boolean canMakeSmores() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+    }
+
+    /**
+     * Get the URI of the selected image from {@link #getPickImageChooserIntent()}.
+
+     * Will return the correct URI for camera and gallery image.
+     *
+     * @param data the returned data of the activity result
+     */
+    public Uri getPickImageResultUri(Intent data) {
+        boolean isCamera = true;
+        if (data != null) {
+            String action = data.getAction();
+            isCamera = action != null && action.equals(MediaStore.ACTION_IMAGE_CAPTURE);
+        }
+
+
+        return isCamera ? getCaptureImageOutputUri() : data.getData();
+    }
+
+    private static Bitmap rotateImageIfRequired(Bitmap img, Uri selectedImage) throws IOException {
+
+        ExifInterface ei = new ExifInterface(selectedImage.getPath());
+        int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                return rotateImage(img, 90);
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                return rotateImage(img, 180);
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                return rotateImage(img, 270);
+            default:
+                return img;
+        }
+    }
+
+    private static Bitmap rotateImage(Bitmap img, int degree) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        Bitmap rotatedImg = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
+        img.recycle();
+        return rotatedImg;
+    }
+
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio > 0) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        switch (requestCode) {
+
+            case ALL_PERMISSIONS_RESULT:
+                for (String perms : permissionsToRequest) {
+                    if (hasPermission(perms)) {
+
+                    } else {
+
+                        permissionsRejected.add(perms);
+                    }
+                }
+
+                if (permissionsRejected.size() > 0) {
+
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (shouldShowRequestPermissionRationale(permissionsRejected.get(0))) {
+                            showMessageOKCancel("These permissions are mandatory for the application. Please allow access.",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                                                //Log.d("API123", "permisionrejected " + permissionsRejected.size());
+
+                                                requestPermissions(permissionsRejected.toArray(new String[permissionsRejected.size()]), ALL_PERMISSIONS_RESULT);
+                                            }
+                                        }
+                                    });
+                            return;
+                        }
+                    }
+
+                }
+
+                break;
+        }
+
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // save file url in bundle as it will be null on scren orientation
+        // changes
+        outState.putParcelable("pic_uri", picUri);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // get the file url
+        picUri = savedInstanceState.getParcelable("pic_uri");
+    }
+
 }

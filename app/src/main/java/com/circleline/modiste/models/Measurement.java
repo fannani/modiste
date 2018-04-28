@@ -23,6 +23,13 @@ public class Measurement extends SugarRecord {
     String lingkarPergelanganLengan;
     String panjangBaju;
     String lingkarKerungLeher;
+    String panjangRok;
+    String tinggiPanggul;
+    String lingkarPesak;
+    String tinggiDuduk;
+    String lingkarPaha;
+    String lingkarLutut;
+    String lingkarKakiCelana;
     String idCustomer;
 
 
@@ -46,6 +53,62 @@ public class Measurement extends SugarRecord {
         this.panjangBaju = panjangBaju;
         this.lingkarKerungLeher = lingkarKerungLeher;
         this.idCustomer = idCustomer;
+    }
+
+    public String getPanjangRok() {
+        return panjangRok;
+    }
+
+    public void setPanjangRok(String panjangRok) {
+        this.panjangRok = panjangRok;
+    }
+
+    public String getTinggiPanggul() {
+        return tinggiPanggul;
+    }
+
+    public void setTinggiPanggul(String tinggiPanggul) {
+        this.tinggiPanggul = tinggiPanggul;
+    }
+
+    public String getLingkarPesak() {
+        return lingkarPesak;
+    }
+
+    public void setLingkarPesak(String lingkarPesak) {
+        this.lingkarPesak = lingkarPesak;
+    }
+
+    public String getTinggiDuduk() {
+        return tinggiDuduk;
+    }
+
+    public void setTinggiDuduk(String tinggiDuduk) {
+        this.tinggiDuduk = tinggiDuduk;
+    }
+
+    public String getLingkarPaha() {
+        return lingkarPaha;
+    }
+
+    public void setLingkarPaha(String lingkarPaha) {
+        this.lingkarPaha = lingkarPaha;
+    }
+
+    public String getLingkarLutut() {
+        return lingkarLutut;
+    }
+
+    public void setLingkarLutut(String lingkarLutut) {
+        this.lingkarLutut = lingkarLutut;
+    }
+
+    public String getLingkarKakiCelana() {
+        return lingkarKakiCelana;
+    }
+
+    public void setLingkarKakiCelana(String lingkarKakiCelana) {
+        this.lingkarKakiCelana = lingkarKakiCelana;
     }
 
     public String getNama() {

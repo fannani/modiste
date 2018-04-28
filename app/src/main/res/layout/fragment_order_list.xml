@@ -5,20 +5,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.circleline.modiste.fragments.OrderListFragment">
 
-    <ListView
-        android:id="@+id/lsvw_order"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        />
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:weightSum="3">
+            <TextView
+                android:text="NAMA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:layout_weight="0.8"/>
+
+            <TextView
+                android:text="MASUK"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:layout_weight="1.1"/>
+
+            <TextView
+                android:text="SELESAI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:layout_weight="1.1"/>
+
+        </LinearLayout>
+            <ListView
+                android:id="@+id/lsvw_order"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+    </LinearLayout>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@drawable/ic_add_black_24dp" />
 </FrameLayout>

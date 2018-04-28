@@ -4,23 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F3F2"
     tools:context="com.circleline.modiste.activities.DetailOrderActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+       >
+        <ImageView
+            android:id="@+id/imvw_foto"
+            android:layout_width="100dp"
+            android:layout_gravity="center_horizontal"
 
-        <TextView
+            android:layout_height="100dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" />
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="10dp"
+
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/txvw_customer_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:text="Pemesan" />
+
+                <TextView
             android:id="@+id/txvw_customer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,11 +77,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:padding="10dp"
 
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
         <TextView
             android:id="@+id/txvw_measurement_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:textStyle="bold"
             android:text="Pengukuran" />
 
@@ -129,21 +170,44 @@
             android:layout_height="wrap_content"
             android:text="TextView" />
 
-        <Button
-            android:id="@+id/btn_selesai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SELESAI"/>
-        <Button
-            android:id="@+id/btn_batalkan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BATALKAN"/>
-        <Button
-            android:id="@+id/btn_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="EDIT"/>
-    </LinearLayout>
 
+
+
+        </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:weightSum="3"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_batalkan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:theme="@style/AppTheme.ButtonDanger"
+                android:text="BATALKAN"/>
+            <Button
+                android:id="@+id/btn_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Colored"
+
+                android:text="EDIT"/>
+
+            <Button
+                android:id="@+id/btn_selesai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:text="SELESAI"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

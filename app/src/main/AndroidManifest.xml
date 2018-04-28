@@ -2,6 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.circleline.modiste">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="ANDROID.PERMISSION.WRITE_EXTERNAL_STORAGE" />
+
+
     <application
         android:name="com.orm.SugarApp"
         android:allowBackup="true"
@@ -15,7 +30,7 @@
             android:value="modiste.db" />
         <meta-data
             android:name="VERSION"
-            android:value="7" />
+            android:value="9" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />

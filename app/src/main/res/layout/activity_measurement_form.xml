@@ -22,122 +22,222 @@
 
         android:orientation="vertical"
        >
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_nama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Nama"
+            app:met_floatingLabel="normal"
              />
 
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_lingkar_badan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:met_floatingLabel="normal"
+
             android:ems="10"
             android:hint="Lingkar Badan"
             android:inputType="number" />
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_lingkar_pinggang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Lingkar Pinggang"
+            app:met_floatingLabel="normal"
+
             android:inputType="number" />
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_lingkar_panggul"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            app:met_floatingLabel="normal"
+
             android:hint="Lingkar Panggul"
             android:inputType="number" />
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_lebar_muka"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            app:met_floatingLabel="normal"
+
             android:hint="Lebar Muka"
             android:inputType="number" />
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_panjang_muka"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            app:met_floatingLabel="normal"
+
             android:hint="Panjang Muka"
             android:inputType="number" />
 
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_lebar_punggung"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            app:met_floatingLabel="normal"
+
             android:hint="Lebar Punggung"
             android:inputType="number" />
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_panjang_punggung"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:met_floatingLabel="normal"
+
             android:ems="10"
             android:hint="Panjang Punggung"
             android:inputType="number" />
 
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_lebar_bahu"
             android:layout_width="match_parent"
+            app:met_floatingLabel="normal"
+
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Lebar Bahu"
             android:inputType="number" />
 
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_panjang_sisi"
             android:layout_width="match_parent"
+            app:met_floatingLabel="normal"
+
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Panjang Sisi"
             android:inputType="number" />
 
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_panjang_lengan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:met_floatingLabel="normal"
+
             android:ems="10"
             android:hint="Panjang Lengan"
             android:inputType="number" />
 
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_lingkar_kerung_lengan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:met_floatingLabel="normal"
+
             android:ems="10"
             android:hint="Lingkar Kerung Lengan"
             android:inputType="number" />
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_lingkar_pergelangan_lengan"
             android:layout_width="match_parent"
+            app:met_floatingLabel="normal"
+
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Lingkar Pergelangan Lengan"
             android:inputType="number" />
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_panjang_baju"
             android:layout_width="match_parent"
+            app:met_floatingLabel="normal"
+
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Panjang Baju"
             android:inputType="number" />
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_lingkar_kerung_leher"
             android:layout_width="match_parent"
+            app:met_floatingLabel="normal"
+
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Lingkar Kerung Leher"
+            android:inputType="number" />
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtx_panjang_rok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            app:met_floatingLabel="normal"
+
+            android:hint="Panjang Rok"
+            android:inputType="number" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtx_tinggi_panggul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            app:met_floatingLabel="normal"
+
+            android:hint="Lingkar Tinggi Panggul"
+            android:inputType="number" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtx_lingkar_pesak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            app:met_floatingLabel="normal"
+
+            android:hint="Lingkar Lingkar Pesak"
+            android:inputType="number" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtx_tinggi_duduk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            app:met_floatingLabel="normal"
+
+            android:hint="Lingkar Tinggi Duduk"
+            android:inputType="number" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtx_lingkar_paha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            app:met_floatingLabel="normal"
+
+            android:hint="Lingkar Lingkar Paha"
+            android:inputType="number" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtx_lingkar_lutut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            app:met_floatingLabel="normal"
+
+            android:hint="Lingkar Lingkar Lutut"
+            android:inputType="number" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtx_lingkar_kaki_celana"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            app:met_floatingLabel="normal"
+
+            android:hint="Lingkar Kaki Celana"
             android:inputType="number" />
 
         <Button
             android:id="@+id/btn_simpan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.Button.Colored"
+
             android:text="Simpan" />
 
 
