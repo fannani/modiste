@@ -121,6 +121,7 @@ public class DetailOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_order);
+        setTitle("Detail Ukuran");
         ButterKnife.bind(this);
 
         orderID = getIntent().getLongExtra("orderID",-1);
@@ -195,7 +196,7 @@ public class DetailOrderActivity extends AppCompatActivity {
         txvw_lingkar_kaki_celana.setText("Lingkar Kaki Celana : "+measurement.getLingkarKakiCelana());
 
         if(order.getStatus().equals("1")){
-            btn_selesai.setVisibility(View.GONE);
+            btn_selesai.setVisibility(View.INVISIBLE);
         }
     }
 

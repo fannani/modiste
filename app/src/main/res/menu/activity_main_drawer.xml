@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
+            app:itemBackground="@drawable/nav_view_item_background"
             android:title="Home" />
         <item
             android:id="@+id/nav_customer"
             android:icon="@drawable/ic_supervisor_account"
+            app:itemBackground="@drawable/nav_view_item_background"
+
             android:title="Data Customer" />
 
     </group>

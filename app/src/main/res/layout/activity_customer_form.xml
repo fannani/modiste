@@ -18,35 +18,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_nama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Nama"/>
+            app:met_floatingLabel="normal"
 
-        <EditText
+            android:hint="Nama"
+            android:inputType="text" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_alamat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Alamat"
-            android:inputType="textPostalAddress" />
+            app:met_floatingLabel="normal"
 
-        <EditText
+            android:hint="Alamat"
+            android:inputType="text" />
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtx_notelp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="phone"
-            android:hint="No Telp"/>
-
+            app:met_floatingLabel="normal"
+            android:hint="No Telp"
+            android:inputType="phone" />
         <Button
             android:id="@+id/btn_simpan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:text="Simpan" />
 
     </LinearLayout>

@@ -33,6 +33,7 @@ public class MeasurementListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_measurement_list);
+        setTitle("Daftar Ukuran");
         ButterKnife.bind(this);
         customerid = getIntent().getLongExtra("customerID",-1);
         measurementList = Measurement.find(Measurement.class,"id_customer = ?",String.valueOf(customerid));

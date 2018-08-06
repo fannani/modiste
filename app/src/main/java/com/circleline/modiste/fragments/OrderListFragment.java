@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+
 import com.circleline.modiste.R;
 import com.circleline.modiste.activities.DetailOrderActivity;
+import com.circleline.modiste.activities.MainActivity;
 import com.circleline.modiste.activities.OrderFormActivity;
 import com.circleline.modiste.adapters.OrderAdapter;
 import com.circleline.modiste.models.OrderDB;
@@ -33,6 +35,7 @@ public class OrderListFragment extends Fragment {
 
     @BindView(R.id.lsvw_order)
     ListView lsvw_order;
+
 
     private List<OrderDB> orderList;
     private OrderAdapter orderAdapter;
@@ -60,6 +63,7 @@ public class OrderListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order_list, container, false);
         ButterKnife.bind(this,view);
+        ((MainActivity) getActivity()).setActionBarTitle("Daftar Order");
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

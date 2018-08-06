@@ -179,7 +179,7 @@
             android:ems="10"
             app:met_floatingLabel="normal"
 
-            android:hint="Lingkar Tinggi Panggul"
+            android:hint="Tinggi Panggul"
             android:inputType="number" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -189,7 +189,7 @@
             android:ems="10"
             app:met_floatingLabel="normal"
 
-            android:hint="Lingkar Lingkar Pesak"
+            android:hint="Lingkar Pesak"
             android:inputType="number" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -199,7 +199,7 @@
             android:ems="10"
             app:met_floatingLabel="normal"
 
-            android:hint="Lingkar Tinggi Duduk"
+            android:hint="Tinggi Duduk"
             android:inputType="number" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -209,7 +209,7 @@
             android:ems="10"
             app:met_floatingLabel="normal"
 
-            android:hint="Lingkar Lingkar Paha"
+            android:hint="Lingkar Paha"
             android:inputType="number" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -219,7 +219,7 @@
             android:ems="10"
             app:met_floatingLabel="normal"
 
-            android:hint="Lingkar Lingkar Lutut"
+            android:hint="Lingkar Lutut"
             android:inputType="number" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -229,7 +229,7 @@
             android:ems="10"
             app:met_floatingLabel="normal"
 
-            android:hint="Lingkar Kaki Celana"
+            android:hint="Kaki Celana"
             android:inputType="number" />
 
         <Button

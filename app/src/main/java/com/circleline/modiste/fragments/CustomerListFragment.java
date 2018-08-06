@@ -2,9 +2,7 @@ package com.circleline.modiste.fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +12,10 @@ import android.widget.ListView;
 
 import com.circleline.modiste.R;
 import com.circleline.modiste.activities.DetailCustomerActivity;
-import com.circleline.modiste.activities.DetailOrderActivity;
-import com.circleline.modiste.activities.OrderFormActivity;
+import com.circleline.modiste.activities.MainActivity;
 import com.circleline.modiste.adapters.CustomerAdapter;
 import com.circleline.modiste.models.Customer;
-import com.circleline.modiste.models.OrderDB;
 import com.circleline.modiste.util.Constant;
-import com.orm.query.Select;
 
 import java.util.List;
 
@@ -34,6 +29,8 @@ public class CustomerListFragment extends Fragment {
 
     @BindView(R.id.lsvw_customer)
     ListView lsvw_customer;
+
+
 
     private List<Customer> customerList;
     private CustomerAdapter customerAdapter;
@@ -62,6 +59,7 @@ public class CustomerListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_customer_list, container, false);
         ButterKnife.bind(this,view);
         customerList = Customer.listAll(Customer.class);
+        ((MainActivity) getActivity()).setActionBarTitle("Daftar Customer");
         customerAdapter = new CustomerAdapter(getActivity(),android.R.layout.simple_list_item_1,customerList);
         lsvw_customer.setAdapter(customerAdapter);
         lsvw_customer.setOnItemClickListener(new AdapterView.OnItemClickListener() {

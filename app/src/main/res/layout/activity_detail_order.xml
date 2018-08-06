@@ -235,9 +235,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 style="@style/Widget.AppCompat.Button.Colored"
-
                 android:text="EDIT"/>
-
             <Button
                 android:id="@+id/btn_selesai"
                 android:layout_width="match_parent"

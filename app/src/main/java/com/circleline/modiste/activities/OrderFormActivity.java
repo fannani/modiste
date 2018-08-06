@@ -121,7 +121,6 @@ public class OrderFormActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i > 0) {
                     selectedMeasurement = measurementAdapter.getItem(i);
-                    Toast.makeText(OrderFormActivity.this,selectedMeasurement.getNama().toString(),Toast.LENGTH_LONG).show();
 
                 }
             }

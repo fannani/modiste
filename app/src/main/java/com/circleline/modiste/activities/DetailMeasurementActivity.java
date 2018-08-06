@@ -101,28 +101,28 @@ public class DetailMeasurementActivity extends AppCompatActivity {
     void setData(){
 
         measurement = Measurement.find(Measurement.class,"id = ?",String.valueOf(measurementID)).get(0);
-        txvw_nama.setText(measurement.getNama());
-        txvw_lingkar_badan.setText(measurement.getLingkarBadan());
-        txvw_lingkar_pinggang.setText(measurement.getLingkarPinggang());
-        txvw_lingkar_panggul.setText(measurement.getLingkarPanggul());
-        txvw_lebar_muka.setText(measurement.getLebarMuka());
-        txvw_panjang_muka.setText(measurement.getPanjangMuka());
-        txvw_lebar_punggung.setText(measurement.getLebarPunggung());
-        txvw_panjang_punggung.setText(measurement.getPanjangPunggung());
-        txvw_lebar_bahu.setText(measurement.getLebarBahu());
-        txvw_panjang_sisi.setText(measurement.getPanjangSisi());
-        txvw_panjang_lengan.setText(measurement.getPanjangLengan());
-        txvw_lingkar_kerung_lengan.setText(measurement.getLingkarKerungLeher());
-        txvw_pergelangan_lengan.setText(measurement.getLingkarPergelanganLengan());
-        txvw_panjang_baju.setText(measurement.getPanjangBaju());
-        txvw_lingkar_kerung_leher.setText(measurement.getLingkarKerungLeher());
-        txvw_panjang_rok.setText(measurement.getPanjangRok());
-        txvw_tinggi_panggul.setText(measurement.getTinggiPanggul());
-        txvw_lingkar_pesak.setText(measurement.getLingkarPesak());
-        txvw_tinggi_duduk.setText(measurement.getTinggiDuduk());
-        txvw_lingkar_paha.setText(measurement.getLingkarPaha());
-        txvw_lingkar_lutut.setText(measurement.getLingkarLutut());
-        txvw_lingkar_kaki_celana.setText(measurement.getLingkarKakiCelana());
+        txvw_nama.setText("Nama : "+measurement.getNama());
+        txvw_lingkar_badan.setText("Lingkar Badan : "+measurement.getLingkarBadan());
+        txvw_lingkar_pinggang.setText("Lingkar Pinggang : "+measurement.getLingkarPinggang());
+        txvw_lingkar_panggul.setText("Lingkar Pinggul : "+measurement.getLingkarPanggul());
+        txvw_lebar_muka.setText("Lebar Muka : "+measurement.getLebarMuka());
+        txvw_panjang_muka.setText("Panjang Muka : "+measurement.getPanjangMuka());
+        txvw_lebar_punggung.setText("Lebar Punggung : "+measurement.getLebarPunggung());
+        txvw_panjang_punggung.setText("Panjang Punggung : "+measurement.getPanjangPunggung());
+        txvw_lebar_bahu.setText("Lebar Bahu : "+measurement.getLebarBahu());
+        txvw_panjang_sisi.setText("Panjang Sisi : "+measurement.getPanjangSisi());
+        txvw_panjang_lengan.setText("Panjang Lengan : "+measurement.getPanjangLengan());
+        txvw_lingkar_kerung_lengan.setText("Lingkar Kerung Lengan : "+measurement.getLingkarKerungLeher());
+        txvw_pergelangan_lengan.setText("Pergelangan Lengan : "+measurement.getLingkarPergelanganLengan());
+        txvw_panjang_baju.setText("Panjang Baju : "+measurement.getPanjangBaju());
+        txvw_lingkar_kerung_leher.setText("Lingkar Kerung Leher : "+measurement.getLingkarKerungLeher());
+        txvw_panjang_rok.setText("Panjang Rok : "+measurement.getPanjangRok());
+        txvw_tinggi_panggul.setText("Tinggi Panggul : "+measurement.getTinggiPanggul());
+        txvw_lingkar_pesak.setText("Lingkar Pesak : "+measurement.getLingkarPesak());
+        txvw_tinggi_duduk.setText("Tinggi Duduk : "+measurement.getTinggiDuduk());
+        txvw_lingkar_paha.setText("Lingkar Paha : "+measurement.getLingkarPaha());
+        txvw_lingkar_lutut.setText("Lingkar Lutut : "+measurement.getLingkarLutut());
+        txvw_lingkar_kaki_celana.setText("Lingkar Kaki Celana : "+measurement.getLingkarKakiCelana());
     }
 
     @OnClick(R.id.btn_edit)

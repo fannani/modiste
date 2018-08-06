@@ -34,6 +34,7 @@ public class DetailCustomerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_customer);
+        setTitle("Detail Customer");
         ButterKnife.bind(this);
         customerID = getIntent().getLongExtra("customerID",-1);
         setData();

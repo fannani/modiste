@@ -25,6 +25,7 @@ public class CustomerFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_form);
+        setTitle("Customer Form");
         ButterKnife.bind(this);
         if(getIntent().hasExtra("customerID")){
             customerID = getIntent().getLongExtra("customerID",-1);
