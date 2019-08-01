@@ -77,7 +77,11 @@ public class OrderFormActivity extends AppCompatActivity {
     @BindView(R.id.imvw_foto)
     ImageView imvw_foto;
 
+    @BindView(R.id.imvw_foto_bahan)
+    ImageView imvw_foto_bahan;
 
+    @BindView(R.id.edtx_ket_bahan)
+    EditText edtx_ket_bahan;
 
     private final static int ALL_PERMISSIONS_RESULT = 107;
 
@@ -93,6 +97,7 @@ public class OrderFormActivity extends AppCompatActivity {
     private OrderDB order;
 
     Bitmap myBitmap;
+    Bitmap myBitmapBahan;
     Uri picUri;
 
     private ArrayList<String> permissionsToRequest;
@@ -121,7 +126,6 @@ public class OrderFormActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i > 0) {
                     selectedMeasurement = measurementAdapter.getItem(i);
-
                 }
             }
 
@@ -203,6 +207,11 @@ public class OrderFormActivity extends AppCompatActivity {
         startActivityForResult(getPickImageChooserIntent(), Constant.UPLOAD_FOTO_REQUEST);
     }
 
+    @OnClick({R.id.btn_upload_bahan})
+    void onUploadFotoBahan() {
+        startActivityForResult(getPickImageChooserIntent(),Constant.UPLOAD_FOTO_BAHAN_REQUEST);
+    }
+
     @OnClick(R.id.edtx_tglselesai)
     void onTglSelesaiClick(){
         showDatePickerDialog();
@@ -230,6 +239,8 @@ public class OrderFormActivity extends AppCompatActivity {
         startActivityForResult(intent, Constant.CREATE_MEASUREMENT_REQUEST);
     }
 
+
+
     @OnClick(R.id.btn_simpan)
     void onSimpan(){
         if(getIntent().hasExtra("orderID")){
@@ -240,6 +251,8 @@ public class OrderFormActivity extends AppCompatActivity {
             updatedOrder.setHarga(edtx_harga.getText().toString());
             updatedOrder.setIdCustomer(selectedCustomer.getId().toString());
             updatedOrder.setIdMeasurement(selectedMeasurement.getId().toString());
+            updatedOrder.setKetBahan(edtx_ket_bahan.getText().toString());
+
             updatedOrder.save();
         } else {
             OrderDB neworder = new OrderDB(selectedCustomer.getId().toString()
@@ -248,11 +261,16 @@ public class OrderFormActivity extends AppCompatActivity {
                     ,edtx_tglselesai.getText().toString()
                     ,edtx_cutting.getText().toString()
                     ,edtx_harga.getText().toString()
+                    ,edtx_ket_bahan.getText().toString()
             );
             neworder.save();
             if(myBitmap != null){
                 String id = String.valueOf(neworder.getId());
                 saveToInternalStorage(myBitmap,id);
+            }
+            if(myBitmapBahan != null){
+                String id = String.valueOf(neworder.getId())+ "bahan";
+                saveToInternalStorage(myBitmapBahan,id);
             }
 
         }
@@ -294,6 +312,27 @@ public class OrderFormActivity extends AppCompatActivity {
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                     myBitmap = bitmap;
                     imvw_foto.setImageBitmap(myBitmap);
+
+                }
+            }
+        } else if(requestCode == Constant.UPLOAD_FOTO_BAHAN_REQUEST){
+            if(resultCode == RESULT_OK){
+                if (getPickImageResultUri(data) != null) {
+                    picUri = getPickImageResultUri(data);
+
+                    try {
+                        myBitmapBahan = MediaStore.Images.Media.getBitmap(this.getContentResolver(), picUri);
+                        myBitmapBahan = getResizedBitmap(myBitmapBahan, 500);
+
+                        imvw_foto_bahan.setImageBitmap(myBitmapBahan);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                    myBitmapBahan = bitmap;
+                    imvw_foto_bahan.setImageBitmap(myBitmapBahan);
 
                 }
             }

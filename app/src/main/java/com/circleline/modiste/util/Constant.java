@@ -15,4 +15,5 @@ public class Constant {
     public static final int DETAIL_MEASUREMENT_REQUEST = 29;
     public static final int EDIT_MEASUREMENT_REQUEST = 30;
     public static final int UPLOAD_FOTO_REQUEST = 31;
+    public static final int UPLOAD_FOTO_BAHAN_REQUEST = 32;
 }

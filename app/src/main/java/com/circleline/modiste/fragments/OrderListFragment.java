@@ -63,7 +63,7 @@ public class OrderListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order_list, container, false);
         ButterKnife.bind(this,view);
-        ((MainActivity) getActivity()).setActionBarTitle("Daftar Order");
+        ((MainActivity) getActivity()).setActionBarTitle("Daftar Order Modiste");
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

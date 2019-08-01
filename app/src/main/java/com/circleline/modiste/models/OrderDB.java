@@ -11,17 +11,27 @@ public class OrderDB extends SugarRecord {
 
 
     String idCustomer;
+
+    public String getKetBahan() {
+        return ketBahan;
+    }
+
+    public void setKetBahan(String ketBahan) {
+        this.ketBahan = ketBahan;
+    }
+
     String idMeasurement;
     String tglMasuk;
     String tglSelesai;
     String cutting;
     String harga;
     String status;
+    String ketBahan;
 
     public OrderDB() {
     }
 
-    public OrderDB(String idCustomer, String idMeasurement, String tglMasuk, String tglSelesai, String cutting, String harga) {
+    public OrderDB(String idCustomer, String idMeasurement, String tglMasuk, String tglSelesai, String cutting, String harga, String ketBahan) {
         this.idCustomer = idCustomer;
         this.idMeasurement = idMeasurement;
         this.tglMasuk = tglMasuk;
@@ -29,6 +39,7 @@ public class OrderDB extends SugarRecord {
         this.cutting = cutting;
         this.harga = harga;
         this.status = "0";
+        this.ketBahan = ketBahan;
     }
 
     public String getIdCustomer() {

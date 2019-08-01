@@ -6,133 +6,172 @@
     android:layout_height="match_parent"
     tools:context="com.circleline.modiste.activities.OrderFormActivity">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/lnly_pemesan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:paddingBottom="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <Spinner
-                android:id="@+id/spnr_pemesan"
+            <LinearLayout
+                android:id="@+id/lnly_pemesan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                android:layout_weight="1" />
+                <Spinner
+                    android:id="@+id/spnr_pemesan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-            <Button
-                android:id="@+id/btn_tambahpemesan"
-                android:layout_width="wrap_content"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/btn_tambahpemesan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_add_black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lnly_tanggal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_add_black" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/lnly_tanggal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edtx_tglselesai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:enabled="false"
+
+                    android:hint="Tanggal Selesai"
+                    android:inputType="date" />
+
+                <Button
+                    android:id="@+id/btn_datepicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_date_range_black_24dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lnly_cutting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edtx_cutting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:hint="Tanggal Cutting"
+                    android:inputType="textPersonName" />
+
+                <Button
+                    android:id="@+id/btn_datepicker_cutting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_date_range_black_24dp" />
+            </LinearLayout>
+
+
             <EditText
-                android:id="@+id/edtx_tglselesai"
+                android:id="@+id/edtx_harga"
                 android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:enabled="false"
-                android:hint="Tanggal Selesai"
                 android:layout_height="wrap_content"
-
                 android:ems="10"
-                android:inputType="date" />
-            <Button
-                android:id="@+id/btn_datepicker"
-                android:layout_width="wrap_content"
+                android:hint="Harga"
+                android:inputType="number" />
+
+            <LinearLayout
+                android:id="@+id/lnly_measurement"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_date_range_black_24dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/lnly_cutting"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spnr_measurement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/btn_tambahmeasurement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_add_black" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imvw_foto"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop" />
+
+            <Button
+                android:id="@+id/btn_upload"
+                android:layout_width="149dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Pilih Foto Desain" />
+
+            <ImageView
+                android:id="@+id/imvw_foto_bahan"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop" />
+
+            <Button
+                android:id="@+id/btn_upload_bahan"
+                android:layout_width="149dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Pilih Foto Bahan" />
 
             <EditText
-                android:id="@+id/edtx_cutting"
+                android:id="@+id/edtx_ket_bahan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:enabled="false"
-                android:layout_weight="1"
-                android:inputType="textPersonName"
-                android:hint="Tanggal Cutting"
-                />
+                android:hint="Keterangan Bahan"
+                android:inputType="text" />
+
             <Button
-                android:id="@+id/btn_datepicker_cutting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_date_range_black_24dp" />
-        </LinearLayout>
-
-
-        <EditText
-            android:id="@+id/edtx_harga"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Harga"
-            android:inputType="number" />
-
-        <LinearLayout
-            android:id="@+id/lnly_measurement"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:id="@+id/spnr_measurement"
+                android:id="@+id/btn_simpan"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/btn_tambahmeasurement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_add_black" />
+                android:text="Simpan" />
         </LinearLayout>
-        <ImageView
-            android:id="@+id/imvw_foto"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:adjustViewBounds="true"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="centerCrop" />
+    </ScrollView>
 
-        <Button
-            android:id="@+id/btn_upload"
-            android:layout_width="149dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Pilih Foto" />
-
-        <Button
-            android:id="@+id/btn_simpan"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Simpan" />
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

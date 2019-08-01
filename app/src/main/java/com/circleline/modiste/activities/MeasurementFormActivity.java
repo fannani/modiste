@@ -79,6 +79,9 @@ public class MeasurementFormActivity extends AppCompatActivity {
     @BindView(R.id.edtx_lingkar_kaki_celana)
     EditText edtx_lingkar_kaki_celana;
 
+    @BindView(R.id.edtx_catatan)
+    EditText edtx_catatan;
+
     private Long idCustomer;
     private Long idMeasurement;
     private Measurement measurement;
@@ -113,6 +116,7 @@ public class MeasurementFormActivity extends AppCompatActivity {
             edtx_lingkar_paha.setText(measurement.getLingkarPaha());
             edtx_lingkar_lutut.setText(measurement.getLingkarLutut());
             edtx_lingkar_kaki_celana.setText(measurement.getLingkarKakiCelana());
+            edtx_catatan.setText(measurement.getCatatan());
         } else {
             idCustomer = getIntent().getLongExtra("idCustomer",-1);
         }
@@ -143,6 +147,7 @@ public class MeasurementFormActivity extends AppCompatActivity {
             measurement.setLingkarPaha(edtx_lingkar_paha.getText().toString());
             measurement.setLingkarLutut(edtx_lingkar_lutut.getText().toString());
             measurement.setLingkarKakiCelana(edtx_lingkar_kaki_celana.getText().toString());
+            measurement.setCatatan(edtx_catatan.getText().toString());
             measurement.save();
         } else {
             Measurement data = new Measurement();
@@ -169,11 +174,10 @@ public class MeasurementFormActivity extends AppCompatActivity {
             data.setLingkarPaha(edtx_lingkar_paha.getText().toString());
             data.setLingkarLutut(edtx_lingkar_lutut.getText().toString());
             data.setLingkarKakiCelana(edtx_lingkar_kaki_celana.getText().toString());
+            data.setCatatan(edtx_catatan.getText().toString());
             data.save();
         }
         setResult(RESULT_OK);
         finish();
-
-
     }
 }

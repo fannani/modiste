@@ -8,12 +8,11 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
-            app:itemBackground="@drawable/nav_view_item_background"
+
             android:title="Home" />
         <item
             android:id="@+id/nav_customer"
             android:icon="@drawable/ic_supervisor_account"
-            app:itemBackground="@drawable/nav_view_item_background"
 
             android:title="Data Customer" />
 

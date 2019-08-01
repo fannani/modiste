@@ -31,12 +31,13 @@ public class Measurement extends SugarRecord {
     String lingkarLutut;
     String lingkarKakiCelana;
     String idCustomer;
+    String catatan;
 
 
     public Measurement() {
     }
 
-    public Measurement(String nama, String lingkarBadan, String lingkarPinggang, String lingkarPanggul, String lebarMuka, String panjangMuka, String lebarPunggung, String panjangPunggung, String lebarBahu, String panjangSisi, String panjangLengan, String lingkarKerungLengan, String lingkarPergelanganLengan, String panjangBaju, String lingkarKerungLeher, String idCustomer) {
+    public Measurement(String nama, String lingkarBadan, String lingkarPinggang, String lingkarPanggul, String lebarMuka, String panjangMuka, String lebarPunggung, String panjangPunggung, String lebarBahu, String panjangSisi, String panjangLengan, String lingkarKerungLengan, String lingkarPergelanganLengan, String panjangBaju, String lingkarKerungLeher, String idCustomer, String catatan) {
         this.nama = nama;
         this.lingkarBadan = lingkarBadan;
         this.lingkarPinggang = lingkarPinggang;
@@ -53,6 +54,7 @@ public class Measurement extends SugarRecord {
         this.panjangBaju = panjangBaju;
         this.lingkarKerungLeher = lingkarKerungLeher;
         this.idCustomer = idCustomer;
+        this.catatan = catatan;
     }
 
     public String getPanjangRok() {
@@ -237,5 +239,13 @@ public class Measurement extends SugarRecord {
 
     public void setLingkarKerungLeher(String lingkarKerungLeher) {
         this.lingkarKerungLeher = lingkarKerungLeher;
+    }
+
+    public String getCatatan() {
+        return catatan;
+    }
+
+    public void setCatatan(String catatan) {
+        this.catatan = catatan;
     }
 }

@@ -23,6 +23,9 @@ public class DetailMeasurementActivity extends AppCompatActivity {
     @BindView(R.id.txvw_lingkar_badan)
     TextView txvw_lingkar_badan;
 
+    @BindView(R.id.txvw_catatan)
+    TextView txvw_catatan;
+
     @BindView(R.id.txvw_lingkar_pinggang)
     TextView txvw_lingkar_pinggang;
 
@@ -123,6 +126,7 @@ public class DetailMeasurementActivity extends AppCompatActivity {
         txvw_lingkar_paha.setText("Lingkar Paha : "+measurement.getLingkarPaha());
         txvw_lingkar_lutut.setText("Lingkar Lutut : "+measurement.getLingkarLutut());
         txvw_lingkar_kaki_celana.setText("Lingkar Kaki Celana : "+measurement.getLingkarKakiCelana());
+        txvw_catatan.setText("Catatan : "+measurement.getCatatan());
     }
 
     @OnClick(R.id.btn_edit)

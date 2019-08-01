@@ -112,6 +112,15 @@ public class DetailOrderActivity extends AppCompatActivity {
     @BindView(R.id.txvw_lingkar_kaki_celana)
     TextView txvw_lingkar_kaki_celana;
 
+    @BindView(R.id.txvw_catatan)
+    TextView txvw_catatan;
+
+    @BindView(R.id.imvw_foto_bahan)
+    ImageView imvw_foto_bahan;
+
+    @BindView(R.id.txvw_ket_bahan)
+    TextView txvw_ket_bahan;
+
     private OrderDB order;
     private Customer customer;
     private Measurement measurement;
@@ -127,6 +136,41 @@ public class DetailOrderActivity extends AppCompatActivity {
         orderID = getIntent().getLongExtra("orderID",-1);
         updateView(orderID);
         loadImageFromStorage(String.valueOf(orderID));
+        loadImageFromStorageBahan(String.valueOf(orderID)+"bahan");
+    }
+
+    private void loadImageFromStorageBahan(String filename)
+    {
+
+        try {
+            ContextWrapper cw = new ContextWrapper(getApplicationContext());
+            // path to /data/data/yourapp/app_data/imageDir
+            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+            // Create imageDir
+            File mypath=new File(directory,filename);
+            final Bitmap b = BitmapFactory.decodeStream(new FileInputStream(mypath));
+            ImageView img=(ImageView)findViewById(R.id.imvw_foto_bahan);
+            img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DetailOrderActivity.this);
+                    LayoutInflater inflater = DetailOrderActivity.this.getLayoutInflater();
+                    View dialogView = inflater.inflate(R.layout.dialog_image_order,null);
+                    ImageView imvw_foto = dialogView.findViewById(R.id.imvw_foto);
+                    imvw_foto.setImageBitmap(b);
+                    builder.setView(dialogView);
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            });
+            img.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     private void loadImageFromStorage(String filename)
@@ -183,7 +227,7 @@ public class DetailOrderActivity extends AppCompatActivity {
         txvw_lebar_bahu.setText("Lebar Bahu : "+measurement.getLebarBahu());
         txvw_panjang_sisi.setText("Panjang Sisi : "+measurement.getPanjangSisi());
         txvw_panjang_lengan.setText("Panjang Lengan : "+measurement.getPanjangLengan());
-        txvw_lingkar_kerung_lengan.setText("Lingkar Kerung Lengan : "+measurement.getLingkarKerungLeher());
+        txvw_lingkar_kerung_lengan.setText("Lingkar Kerung Lengan : "+measurement.getLingkarKerungLengan());
         txvw_pergelangan_lengan.setText("Pergelangan Lengan : "+measurement.getLingkarPergelanganLengan());
         txvw_panjang_baju.setText("Panjang Baju : "+measurement.getPanjangBaju());
         txvw_lingkar_kerung_leher.setText("Lingkar Kerung Leher : "+measurement.getLingkarKerungLeher());
@@ -194,6 +238,9 @@ public class DetailOrderActivity extends AppCompatActivity {
         txvw_lingkar_paha.setText("Lingkar Paha : "+measurement.getLingkarPaha());
         txvw_lingkar_lutut.setText("Lingkar Lutut : "+measurement.getLingkarLutut());
         txvw_lingkar_kaki_celana.setText("Lingkar Kaki Celana : "+measurement.getLingkarKakiCelana());
+        txvw_catatan.setText("Catatan : "+measurement.getCatatan());
+        txvw_ket_bahan.setText("Keterangan : "+order.getKetBahan());
+
 
         if(order.getStatus().equals("1")){
             btn_selesai.setVisibility(View.INVISIBLE);
